@@ -1,1 +1,285 @@
+/* ========================================
+   CONTROLE FINANCEIRO
+   Estilo para celular
+======================================== */
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #20252b;
+    min-height: 100vh;
+}
+
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.topo {
+    background: #17212b;
+    color: white;
+    padding: 28px 20px 32px;
+    text-align: center;
+    border-radius: 0 0 28px 28px;
+}
+
+.topo h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.topo p {
+    font-size: 14px;
+    opacity: 0.75;
+}
+
+
+/* ========================================
+   PAINEL
+======================================== */
+
+.painel {
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
+    padding: 18px;
+}
+
+
+/* ========================================
+   SALDO PRINCIPAL
+======================================== */
+
+.saldo-principal {
+    background: white;
+    border-radius: 22px;
+    padding: 24px 20px;
+    margin-top: -12px;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.saldo-principal span {
+    display: block;
+    font-size: 13px;
+    color: #737b84;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.saldo-principal strong {
+    display: block;
+    font-size: 32px;
+    color: #17212b;
+}
+
+
+/* ========================================
+   RESUMO
+======================================== */
+
+.resumo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.resumo-card {
+    background: white;
+    border-radius: 18px;
+    padding: 18px;
+    position: relative;
+    padding-left: 54px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.resumo-card::before {
+    content: "";
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+}
+
+
+/* ÍCONE ENTRADAS */
+
+.resumo-card.entrada::before {
+    background: #2d9b68;
+}
+
+.resumo-card.entrada::after {
+    content: "↓";
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-54%);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+/* ÍCONE CONTAS */
+
+.resumo-card.conta::before {
+    background: #c95b5b;
+}
+
+.resumo-card.conta::after {
+    content: "↑";
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-54%);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+/* ÍCONE PENDENTE */
+
+.resumo-card.pendente::before {
+    background: #d39a36;
+}
+
+.resumo-card.pendente::after {
+    content: "•";
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-58%);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.resumo-card span {
+    display: block;
+    font-size: 13px;
+    color: #737b84;
+    margin-bottom: 5px;
+}
+
+.resumo-card strong {
+    display: block;
+    font-size: 20px;
+    color: #252b31;
+}
+
+
+/* ========================================
+   SALDO FUTURO
+======================================== */
+
+.saldo-futuro {
+    background: #e9eef2;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 18px;
+    text-align: center;
+}
+
+.saldo-futuro span {
+    display: block;
+    font-size: 13px;
+    color: #68727c;
+    margin-bottom: 7px;
+}
+
+.saldo-futuro strong {
+    display: block;
+    font-size: 25px;
+    color: #17212b;
+}
+
+
+/* ========================================
+   BOTÕES
+======================================== */
+
+.acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.acoes a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 54px;
+
+    border-radius: 16px;
+
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    transition: transform 0.15s ease;
+}
+
+
+/* BOTÕES PRINCIPAIS */
+
+.acoes a:nth-child(1),
+.acoes a:nth-child(2) {
+    background: #17212b;
+    color: white;
+}
+
+
+/* BOTÕES SECUNDÁRIOS */
+
+.acoes a:nth-child(3),
+.acoes a:nth-child(4) {
+    background: white;
+    color: #17212b;
+    border: 1px solid #dfe3e7;
+}
+
+
+/* EFEITO AO TOCAR */
+
+.acoes a:active {
+    transform: scale(0.98);
+}
+
+
+/* ========================================
+   CELULARES MUITO PEQUENOS
+======================================== */
+
+@media (max-width: 360px) {
+
+    .painel {
+        padding: 14px;
+    }
+
+    .saldo-principal strong {
+        font-size: 28px;
+    }
+
+    .resumo-card strong {
+        font-size: 18px;
+    }
+
+}
