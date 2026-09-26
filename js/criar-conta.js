@@ -1,4 +1,5 @@
 javascript
+console.log("ARQUIVO NOVO CARREGADO");
 import { auth } from "./firebase.js";
 
 import {
