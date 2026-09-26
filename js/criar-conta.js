@@ -1,4 +1,4 @@
-```javascript
+javascript
 import { auth } from "./firebase.js";
 
 import {
@@ -123,4 +123,4 @@ criarConta.addEventListener(
 
     }
 );
-```
+
