@@ -1,6 +1,11 @@
 import { db } from "./firebase.js";
 
 import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+import {
     collection,
     addDoc,
     getDocs,
@@ -10,6 +15,9 @@ import {
     orderBy,
     query
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+const auth = getAuth();
 
 
 const descricao = document.getElementById("descricao");
@@ -141,206 +149,4 @@ async function carregarContas() {
             ).toLocaleDateString("pt-BR");
 
 
-            const card = document.createElement("div");
-
-            card.className = "card-conta";
-
-
-            card.innerHTML = `
-
-                <h3>
-                    ${conta.descricao}
-                </h3>
-
-                <p>
-                    ${valorFormatado}
-                </p>
-
-                <p>
-                    Vencimento: ${dataFormatada}
-                </p>
-
-                <p>
-                    Status:
-                    <strong>
-                        ${
-                            conta.status === "pago"
-                                ? "PAGO"
-                                : "PENDENTE"
-                        }
-                    </strong>
-                </p>
-
-
-                ${
-                    conta.status === "pendente"
-
-                    ? `
-                        <button
-                            class="btn-pagar"
-                        >
-                            MARCAR COMO PAGO
-                        </button>
-                    `
-
-                    : `
-                        <button
-                            class="btn-desfazer"
-                        >
-                            VOLTAR PARA PENDENTE
-                        </button>
-                    `
-                }
-
-
-                <button
-                    class="btn-excluir"
-                >
-                    EXCLUIR
-                </button>
-
-            `;
-
-
-            const botaoStatus =
-                card.querySelector(
-                    ".btn-pagar, .btn-desfazer"
-                );
-
-
-            botaoStatus.addEventListener(
-                "click",
-                () => alterarStatus(
-                    documento.id,
-                    conta.status
-                )
-            );
-
-
-            const botaoExcluir =
-                card.querySelector(
-                    ".btn-excluir"
-                );
-
-
-            botaoExcluir.addEventListener(
-                "click",
-                () => excluirConta(
-                    documento.id,
-                    conta.descricao
-                )
-            );
-
-
-            listaContas.appendChild(card);
-
-        });
-
-
-    } catch (erro) {
-
-        console.error(erro);
-
-        listaContas.innerHTML = `
-            <p>
-                Erro ao carregar as contas.
-            </p>
-        `;
-
-    }
-
-}
-
-
-
-/* ========================================
-   ALTERAR STATUS
-======================================== */
-
-async function alterarStatus(
-    id,
-    statusAtual
-) {
-
-    const novoStatus =
-        statusAtual === "pendente"
-            ? "pago"
-            : "pendente";
-
-
-    try {
-
-        await updateDoc(
-            doc(db, "contas", id),
-            {
-                status: novoStatus
-            }
-        );
-
-
-        carregarContas();
-
-
-    } catch (erro) {
-
-        console.error(erro);
-
-        alert(
-            "Não foi possível alterar o status."
-        );
-
-    }
-
-}
-
-
-
-/* ========================================
-   EXCLUIR CONTA
-======================================== */
-
-async function excluirConta(
-    id,
-    descricaoConta
-) {
-
-    const confirmar = confirm(
-        `Deseja realmente excluir a conta "${descricaoConta}"?`
-    );
-
-
-    if (!confirmar) {
-        return;
-    }
-
-
-    try {
-
-        await deleteDoc(
-            doc(db, "contas", id)
-        );
-
-
-        alert(
-            "Conta excluída com sucesso!"
-        );
-
-
-        carregarContas();
-
-
-    } catch (erro) {
-
-        console.error(erro);
-
-        alert(
-            "Não foi possível excluir a conta."
-        );
-
-    }
-
-}
-
-
-
-carregarContas();
+            const card = document.creat
