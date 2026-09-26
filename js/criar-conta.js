@@ -1,10 +1,45 @@
 javascript
-console.log("ARQUIVO NOVO CARREGADO");
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
 import {
+    getAuth,
     createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDw6y1sqRa6P-BAY2KkNXz7GYg3bEo",
+
+    authDomain:
+        "controle-financeiro-f6df9.firebaseapp.com",
+
+    projectId:
+        "controle-financeiro-f6df9",
+
+    storageBucket:
+        "controle-financeiro-f6df9.firebasestorage.app",
+
+    messagingSenderId:
+        "829663947104",
+
+    appId:
+        "1:829663947104:web:e114bd130737161ce65605"
+
+};
+
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const auth =
+    getAuth(app);
 
 
 const email =
@@ -14,13 +49,19 @@ const senha =
     document.getElementById("senha");
 
 const confirmarSenha =
-    document.getElementById("confirmarSenha");
+    document.getElementById(
+        "confirmarSenha"
+    );
 
 const criarConta =
-    document.getElementById("criarConta");
+    document.getElementById(
+        "criarConta"
+    );
 
 const mensagem =
-    document.getElementById("mensagem");
+    document.getElementById(
+        "mensagem"
+    );
 
 
 criarConta.addEventListener(
@@ -49,7 +90,9 @@ criarConta.addEventListener(
         }
 
 
-        if (senhaInformada.length < 6) {
+        if (
+            senhaInformada.length < 6
+        ) {
 
             mensagem.textContent =
                 "A senha deve ter pelo menos 6 caracteres.";
@@ -58,7 +101,10 @@ criarConta.addEventListener(
         }
 
 
-        if (senhaInformada !== confirmacao) {
+        if (
+            senhaInformada !==
+            confirmacao
+        ) {
 
             mensagem.textContent =
                 "As senhas não são iguais.";
