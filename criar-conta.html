@@ -1,0 +1,118 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Criar conta - Controle Financeiro</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <header class="topo">
+
+        <h1>
+            Controle Financeiro
+        </h1>
+
+        <p>
+            Crie sua conta
+        </p>
+
+    </header>
+
+
+    <main class="conteudo">
+
+        <section class="formulario">
+
+            <h2>
+                Criar conta
+            </h2>
+
+
+            <label for="email">
+                E-mail
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="seu@email.com"
+                autocomplete="email"
+            >
+
+
+            <label for="senha">
+                Senha
+            </label>
+
+            <input
+                type="password"
+                id="senha"
+                placeholder="Mínimo de 6 caracteres"
+                autocomplete="new-password"
+            >
+
+
+            <label for="confirmarSenha">
+                Confirmar senha
+            </label>
+
+            <input
+                type="password"
+                id="confirmarSenha"
+                placeholder="Digite a senha novamente"
+                autocomplete="new-password"
+            >
+
+
+            <button id="criarConta">
+                CRIAR CONTA
+            </button>
+
+
+            <p
+                id="mensagem"
+                style="
+                    margin-top: 15px;
+                    text-align: center;
+                    font-size: 14px;
+                "
+            ></p>
+
+        </section>
+
+
+        <a
+            href="login.html"
+            class="voltar"
+        >
+            Já tenho uma conta
+        </a>
+
+    </main>
+
+
+    <script
+        type="module"
+        src="js/criar-conta.js"
+    ></script>
+
+</body>
+
+</html>
+```
