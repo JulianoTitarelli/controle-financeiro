@@ -1,4 +1,3 @@
-javascript
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
@@ -12,7 +11,7 @@ import {
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyDw6y1sqRa6P-BAY2KkNXz7GYg3bEo",
+        "AIzaSyDw6y1sqRa6P-BAY2KE22KkNXz7GYg3bEo",
 
     authDomain:
         "controle-financeiro-f6df9.firebaseapp.com",
@@ -170,4 +169,3 @@ criarConta.addEventListener(
 
     }
 );
-
