@@ -1,6 +1,6 @@
 javascript
 console.log("ARQUIVO NOVO CARREGADO");
-import { auth } from "./firebase.js";
+import { auth } from "./firebase.js?v=2";
 
 import {
     createUserWithEmailAndPassword
