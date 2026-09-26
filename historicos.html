@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Históricos - Controle Financeiro</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <header class="topo">
+
+        <h1>
+            Históricos
+        </h1>
+
+        <p>
+            Consulte sua movimentação por mês
+        </p>
+
+    </header>
+
+
+    <main class="conteudo">
+
+
+        <!-- ========================= -->
+        <!-- SELEÇÃO DO MÊS -->
+        <!-- ========================= -->
+
+        <section class="formulario">
+
+            <h2>
+                Selecionar mês
+            </h2>
+
+            <label for="mesSelecionado">
+                Mês
+            </label>
+
+            <input
+                type="month"
+                id="mesSelecionado"
+            >
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- RESUMO DO MÊS -->
+        <!-- ========================= -->
+
+        <section class="lista">
+
+            <h2>
+                Resumo do mês
+            </h2>
+
+
+            <div class="card-conta">
+
+                <p>
+                    Entradas recebidas
+                </p>
+
+                <strong id="totalEntradasMes">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+
+            <div class="card-conta">
+
+                <p>
+                    Contas pagas
+                </p>
+
+                <strong id="totalContasMes">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+
+            <div class="card-conta">
+
+                <p>
+                    Resultado do mês
+                </p>
+
+                <strong id="saldoMes">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- MOVIMENTAÇÕES -->
+        <!-- ========================= -->
+
+        <section class="lista">
+
+            <h2>
+                Movimentações
+            </h2>
+
+            <div id="listaHistorico">
+
+                <p>
+                    Selecione um mês.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <a
+            href="index.html"
+            class="voltar"
+        >
+            Voltar para o início
+        </a>
+
+
+    </main>
+
+
+    <script
+        type="module"
+        src="js/historicos.js"
+    ></script>
+
+</body>
+
+</html>
