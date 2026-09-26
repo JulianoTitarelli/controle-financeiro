@@ -4,7 +4,9 @@ import {
 
 import {
     getAuth,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
 
@@ -41,6 +43,10 @@ const auth =
     getAuth(app);
 
 
+const provedorGoogle =
+    new GoogleAuthProvider();
+
+
 const email =
     document.getElementById("email");
 
@@ -50,9 +56,16 @@ const senha =
 const entrar =
     document.getElementById("entrar");
 
+const google =
+    document.getElementById("google");
+
 const mensagem =
     document.getElementById("mensagem");
 
+
+/* =========================
+   LOGIN COM E-MAIL
+========================= */
 
 entrar.addEventListener(
     "click",
@@ -138,3 +151,20 @@ entrar.addEventListener(
 
     }
 );
+
+
+/* =========================
+   LOGIN COM GOOGLE
+========================= */
+
+google.addEventListener(
+    "click",
+    async () => {
+
+        mensagem.textContent = "";
+
+
+        try {
+
+            await signInWithPopup(
+                auth,
