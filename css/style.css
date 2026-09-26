@@ -281,5 +281,192 @@ body {
     .resumo-card strong {
         font-size: 18px;
     }
-
 }
+
+/* ========================================
+   TELA DE CONTAS
+======================================== */
+
+.conteudo {
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
+    padding: 18px;
+}
+
+
+/* ========================================
+   FORMULÁRIO
+======================================== */
+
+.formulario {
+    background: white;
+    padding: 22px;
+    border-radius: 22px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.formulario h2,
+.lista h2 {
+    font-size: 18px;
+    margin-bottom: 18px;
+}
+
+
+.formulario label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #68727c;
+    margin-bottom: 6px;
+}
+
+
+.formulario input {
+    width: 100%;
+    height: 50px;
+
+    border: 1px solid #dfe3e7;
+    border-radius: 13px;
+
+    padding: 0 14px;
+
+    font-size: 16px;
+
+    margin-bottom: 15px;
+
+    outline: none;
+
+    background: #fafbfc;
+}
+
+
+.formulario input:focus {
+    border-color: #17212b;
+    background: white;
+}
+
+
+.formulario > button {
+    width: 100%;
+    min-height: 52px;
+
+    border: none;
+    border-radius: 15px;
+
+    background: #17212b;
+    color: white;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* ========================================
+   LISTA
+======================================== */
+
+.lista {
+    margin-top: 24px;
+}
+
+
+.lista h2 {
+    margin-left: 4px;
+}
+
+
+/* ========================================
+   CARD DA CONTA
+======================================== */
+
+.card-conta {
+    background: white;
+
+    border-radius: 19px;
+
+    padding: 18px;
+
+    margin-bottom: 12px;
+
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+
+.card-conta h3 {
+    font-size: 17px;
+    margin-bottom: 9px;
+}
+
+
+.card-conta p {
+    font-size: 14px;
+    color: #68727c;
+    margin-bottom: 6px;
+}
+
+
+.card-conta strong {
+    color: #17212b;
+}
+
+
+/* ========================================
+   BOTÃO PAGAR
+======================================== */
+
+.btn-pagar,
+.btn-desfazer {
+    width: 100%;
+
+    min-height: 46px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    margin-top: 10px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.btn-pagar {
+    background: #17212b;
+    color: white;
+}
+
+
+.btn-desfazer {
+    background: #e9eef2;
+    color: #17212b;
+}
+
+
+/* ========================================
+   VOLTAR
+======================================== */
+
+.voltar {
+    display: block;
+
+    text-align: center;
+
+    margin: 24px 0 10px;
+
+    color: #17212b;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    text-decoration: none;
+}
+   }
