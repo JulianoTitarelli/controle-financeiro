@@ -469,4 +469,34 @@ body {
 
     text-decoration: none;
 }
-   }
+
+/* ========================================
+   BOTÃO EXCLUIR
+======================================== */
+
+.btn-excluir {
+    width: 100%;
+
+    min-height: 46px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    margin-top: 10px;
+
+    background: #f3dddd;
+
+    color: #a33f3f;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.btn-excluir:active {
+    transform: scale(0.98);
+}
