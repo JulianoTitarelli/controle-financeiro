@@ -5,6 +5,7 @@ import {
     addDoc,
     getDocs,
     updateDoc,
+    deleteDoc,
     doc,
     orderBy,
     query
@@ -14,7 +15,6 @@ import {
 const descricao = document.getElementById("descricao");
 const valor = document.getElementById("valor");
 const vencimento = document.getElementById("vencimento");
-
 const salvarConta = document.getElementById("salvarConta");
 const listaContas = document.getElementById("listaContas");
 
@@ -22,9 +22,10 @@ const listaContas = document.getElementById("listaContas");
 const contasRef = collection(db, "contas");
 
 
-// ==============================
-// SALVAR NOVA CONTA
-// ==============================
+
+/* ========================================
+   ADICIONAR CONTA
+======================================== */
 
 salvarConta.addEventListener("click", async () => {
 
@@ -34,26 +35,20 @@ salvarConta.addEventListener("click", async () => {
 
 
     if (!nome) {
-
         alert("Digite a descrição da conta.");
         return;
-
     }
 
 
     if (!valorConta || valorConta <= 0) {
-
         alert("Digite um valor válido.");
         return;
-
     }
 
 
     if (!dataVencimento) {
-
         alert("Informe o vencimento.");
         return;
-
     }
 
 
@@ -62,13 +57,9 @@ salvarConta.addEventListener("click", async () => {
         await addDoc(contasRef, {
 
             descricao: nome,
-
             valor: valorConta,
-
             vencimento: dataVencimento,
-
             status: "pendente",
-
             criadoEm: new Date()
 
         });
@@ -84,7 +75,6 @@ salvarConta.addEventListener("click", async () => {
 
         carregarContas();
 
-
     } catch (erro) {
 
         console.error(erro);
@@ -96,9 +86,10 @@ salvarConta.addEventListener("click", async () => {
 });
 
 
-// ==============================
-// CARREGAR CONTAS
-// ==============================
+
+/* ========================================
+   CARREGAR CONTAS
+======================================== */
 
 async function carregarContas() {
 
@@ -122,13 +113,10 @@ async function carregarContas() {
         if (resultado.empty) {
 
             listaContas.innerHTML = `
-                <p>
-                    Nenhuma conta cadastrada.
-                </p>
+                <p>Nenhuma conta cadastrada.</p>
             `;
 
             return;
-
         }
 
 
@@ -137,25 +125,23 @@ async function carregarContas() {
             const conta = documento.data();
 
 
-            const valorFormatado =
-                Number(conta.valor).toLocaleString(
-                    "pt-BR",
-                    {
-                        style: "currency",
-                        currency: "BRL"
-                    }
-                );
+            const valorFormatado = Number(
+                conta.valor
+            ).toLocaleString(
+                "pt-BR",
+                {
+                    style: "currency",
+                    currency: "BRL"
+                }
+            );
 
 
-            const dataFormatada =
-                new Date(
-                    conta.vencimento + "T00:00:00"
-                ).toLocaleDateString("pt-BR");
+            const dataFormatada = new Date(
+                conta.vencimento + "T00:00:00"
+            ).toLocaleDateString("pt-BR");
 
 
-            const card =
-                document.createElement("div");
-
+            const card = document.createElement("div");
 
             card.className = "card-conta";
 
@@ -171,8 +157,7 @@ async function carregarContas() {
                 </p>
 
                 <p>
-                    Vencimento:
-                    ${dataFormatada}
+                    Vencimento: ${dataFormatada}
                 </p>
 
                 <p>
@@ -186,36 +171,63 @@ async function carregarContas() {
                     </strong>
                 </p>
 
+
                 ${
                     conta.status === "pendente"
-                    ?
+
+                    ? `
+                        <button
+                            class="btn-pagar"
+                        >
+                            MARCAR COMO PAGO
+                        </button>
                     `
-                    <button class="btn-pagar">
-                        MARCAR COMO PAGO
-                    </button>
-                    `
-                    :
-                    `
-                    <button
-                        class="btn-desfazer"
-                    >
-                        VOLTAR PARA PENDENTE
-                    </button>
+
+                    : `
+                        <button
+                            class="btn-desfazer"
+                        >
+                            VOLTAR PARA PENDENTE
+                        </button>
                     `
                 }
+
+
+                <button
+                    class="btn-excluir"
+                >
+                    EXCLUIR
+                </button>
 
             `;
 
 
-            const botao =
-                card.querySelector("button");
+            const botaoStatus =
+                card.querySelector(
+                    ".btn-pagar, .btn-desfazer"
+                );
 
 
-            botao.addEventListener(
+            botaoStatus.addEventListener(
                 "click",
                 () => alterarStatus(
                     documento.id,
                     conta.status
+                )
+            );
+
+
+            const botaoExcluir =
+                card.querySelector(
+                    ".btn-excluir"
+                );
+
+
+            botaoExcluir.addEventListener(
+                "click",
+                () => excluirConta(
+                    documento.id,
+                    conta.descricao
                 )
             );
 
@@ -240,9 +252,10 @@ async function carregarContas() {
 }
 
 
-// ==============================
-// ALTERAR STATUS
-// ==============================
+
+/* ========================================
+   ALTERAR STATUS
+======================================== */
 
 async function alterarStatus(
     id,
@@ -281,8 +294,53 @@ async function alterarStatus(
 }
 
 
-// ==============================
-// INICIAR
-// ==============================
+
+/* ========================================
+   EXCLUIR CONTA
+======================================== */
+
+async function excluirConta(
+    id,
+    descricaoConta
+) {
+
+    const confirmar = confirm(
+        `Deseja realmente excluir a conta "${descricaoConta}"?`
+    );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    try {
+
+        await deleteDoc(
+            doc(db, "contas", id)
+        );
+
+
+        alert(
+            "Conta excluída com sucesso!"
+        );
+
+
+        carregarContas();
+
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        alert(
+            "Não foi possível excluir a conta."
+        );
+
+    }
+
+}
+
+
 
 carregarContas();
