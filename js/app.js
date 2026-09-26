@@ -1,9 +1,17 @@
 import { db } from "./firebase.js";
 
 import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+import {
     collection,
     getDocs
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+const auth = getAuth();
 
 
 const saldoAtual =
@@ -436,4 +444,25 @@ async function carregarResumo() {
 }
 
 
-carregarResumo();
+/* ========================= */
+/* VERIFICAR LOGIN */
+/* ========================= */
+
+onAuthStateChanged(
+    auth,
+    (usuario) => {
+
+        if (!usuario) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        carregarResumo();
+
+    }
+);
