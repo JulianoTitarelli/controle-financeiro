@@ -196,6 +196,39 @@
         src="js/app.js"
     ></script>
 
+    <script>
+    if ("serviceWorker" in navigator) {
+
+        window.addEventListener(
+            "load",
+            () => {
+
+                navigator.serviceWorker
+                    .register(
+                        "./service-worker.js"
+                    )
+                    .then(
+                        () => {
+                            console.log(
+                                "Service Worker registrado."
+                            );
+                        }
+                    )
+                    .catch(
+                        (erro) => {
+                            console.error(
+                                "Erro no Service Worker:",
+                                erro
+                            );
+                        }
+                    );
+
+            }
+        );
+
+    }
+</script>
+
 </body>
 
 </html>
