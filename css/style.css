@@ -600,3 +600,196 @@ css
     color: #737b84;
 }
 
+/* ========================================
+   PÁGINA DE HISTÓRICOS
+======================================== */
+
+.pagina-historicos {
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
+    padding: 18px;
+}
+
+
+/* ========================================
+   SELETOR DE MÊS
+======================================== */
+
+.seletor-mes {
+    background: white;
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.seletor-mes h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+.seletor-mes label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #68727c;
+    margin-bottom: 6px;
+}
+
+.seletor-mes input {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #dfe3e7;
+    border-radius: 13px;
+    padding: 0 14px;
+    font-size: 16px;
+    background: #fafbfc;
+    outline: none;
+}
+
+.seletor-mes input:focus {
+    border-color: #17212b;
+    background: white;
+}
+
+
+/* ========================================
+   RESUMO DO MÊS
+======================================== */
+
+.resumo-historico {
+    margin-top: 22px;
+}
+
+.resumo-historico h2,
+.movimentacoes-historico h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #20252b;
+}
+
+.resumo-historico-card {
+    background: white;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.resumo-historico-card span {
+    display: block;
+    font-size: 13px;
+    color: #737b84;
+    margin-bottom: 6px;
+}
+
+.resumo-historico-card strong {
+    display: block;
+    font-size: 21px;
+    color: #252b31;
+}
+
+
+/* ENTRADAS */
+
+.resumo-historico-card.entrada strong {
+    color: #2d9b68;
+}
+
+
+/* CONTAS */
+
+.resumo-historico-card.conta strong {
+    color: #c95b5b;
+}
+
+
+/* RESULTADO */
+
+.resumo-historico-card.resultado {
+    background: #e9eef2;
+}
+
+.resumo-historico-card.resultado strong {
+    color: #17212b;
+}
+
+
+/* ========================================
+   MOVIMENTAÇÕES
+======================================== */
+
+.movimentacoes-historico {
+    margin-top: 24px;
+}
+
+.card-historico {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    background: white;
+    border-radius: 17px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.card-historico h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
+    color: #252b31;
+}
+
+.card-historico p {
+    font-size: 12px;
+    color: #737b84;
+}
+
+.card-historico strong {
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+
+/* ENTRADA */
+
+.card-historico.entrada strong {
+    color: #2d9b68;
+}
+
+
+/* CONTA */
+
+.card-historico.conta strong {
+    color: #c95b5b;
+}
+
+
+/* ========================================
+   NENHUM HISTÓRICO
+======================================== */
+
+.sem-historico {
+    background: white;
+    border-radius: 17px;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #737b84;
+}
+
+
+/* ========================================
+   BOTÃO VOLTAR
+======================================== */
+
+.voltar-historico {
+    display: block;
+    text-align: center;
+    margin: 26px 0 10px;
+    color: #17212b;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
