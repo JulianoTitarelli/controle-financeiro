@@ -500,3 +500,103 @@ body {
 .btn-excluir:active {
     transform: scale(0.98);
 }
+css
+/* ========================================
+   PRÓXIMAS CONTAS
+======================================== */
+
+.proximas-contas {
+    margin-top: 20px;
+}
+
+
+.titulo-secao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+}
+
+
+.titulo-secao h2 {
+    font-size: 18px;
+    color: #20252b;
+}
+
+
+.titulo-secao a {
+    font-size: 13px;
+    font-weight: bold;
+
+    color: #17212b;
+
+    text-decoration: none;
+}
+
+
+/* ========================================
+   CARD PRÓXIMA CONTA
+======================================== */
+
+.card-proxima-conta {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    background: white;
+
+    border-radius: 17px;
+
+    padding: 16px 18px;
+
+    margin-bottom: 10px;
+
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+
+.card-proxima-conta h3 {
+    font-size: 15px;
+
+    margin-bottom: 5px;
+
+    color: #252b31;
+}
+
+
+.card-proxima-conta p {
+    font-size: 12px;
+
+    color: #737b84;
+}
+
+
+.card-proxima-conta strong {
+    font-size: 15px;
+
+    color: #c95b5b;
+
+    white-space: nowrap;
+}
+
+
+.sem-contas {
+    background: white;
+
+    border-radius: 17px;
+
+    padding: 18px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    color: #737b84;
+}
+
