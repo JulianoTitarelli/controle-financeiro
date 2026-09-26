@@ -24,6 +24,9 @@ const saldoFuturo =
 const listaProximasContas =
     document.getElementById("listaProximasContas");
 
+const listaHistorico =
+    document.getElementById("listaHistorico");
+
 
 function formatarMoeda(valor) {
 
@@ -74,6 +77,8 @@ async function carregarResumo() {
 
         const listaContasPendentes = [];
 
+        const historico = [];
+
 
         // =========================
         // ENTRADAS
@@ -94,6 +99,24 @@ async function carregarResumo() {
                         Number(
                             entrada.valor
                         );
+
+
+                    historico.push({
+
+                        tipo: "entrada",
+
+                        descricao:
+                            entrada.descricao,
+
+                        valor:
+                            Number(
+                                entrada.valor
+                            ),
+
+                        data:
+                            entrada.data
+
+                    });
 
                 }
 
@@ -123,6 +146,24 @@ async function carregarResumo() {
                             conta.valor
                         );
 
+
+                    historico.push({
+
+                        tipo: "conta",
+
+                        descricao:
+                            conta.descricao,
+
+                        valor:
+                            Number(
+                                conta.valor
+                            ),
+
+                        data:
+                            conta.vencimento
+
+                    });
+
                 }
 
 
@@ -139,6 +180,7 @@ async function carregarResumo() {
 
 
                     listaContasPendentes.push({
+
                         descricao:
                             conta.descricao,
 
@@ -149,6 +191,7 @@ async function carregarResumo() {
 
                         vencimento:
                             conta.vencimento
+
                     });
 
                 }
@@ -220,7 +263,8 @@ async function carregarResumo() {
         );
 
 
-        listaProximasContas.innerHTML = "";
+        listaProximasContas.innerHTML =
+            "";
 
 
         if (
@@ -252,6 +296,7 @@ async function carregarResumo() {
 
                         card.innerHTML = `
                             <div>
+
                                 <h3>
                                     ${conta.descricao}
                                 </h3>
@@ -262,6 +307,7 @@ async function carregarResumo() {
                                         conta.vencimento
                                     )}
                                 </p>
+
                             </div>
 
                             <strong>
@@ -280,6 +326,97 @@ async function carregarResumo() {
 
         }
 
+
+        // =========================
+        // HISTÓRICO
+        // =========================
+
+        historico.sort(
+            (a, b) => {
+
+                return String(
+                    b.data
+                ).localeCompare(
+                    String(
+                        a.data
+                    )
+                );
+
+            }
+        );
+
+
+        listaHistorico.innerHTML =
+            "";
+
+
+        const ultimos =
+            historico.slice(0, 10);
+
+
+        if (
+            ultimos.length === 0
+        ) {
+
+            listaHistorico.innerHTML = `
+                <p class="sem-historico">
+                    Nenhuma movimentação registrada.
+                </p>
+            `;
+
+        } else {
+
+            ultimos.forEach(
+                (movimento) => {
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        movimento.tipo === "entrada"
+                            ? "card-historico entrada"
+                            : "card-historico conta";
+
+
+                    card.innerHTML = `
+                        <div>
+
+                            <h3>
+                                ${movimento.descricao}
+                            </h3>
+
+                            <p>
+                                ${formatarData(
+                                    movimento.data
+                                )}
+                            </p>
+
+                        </div>
+
+                        <strong>
+                            ${
+                                movimento.tipo === "entrada"
+                                    ? "+"
+                                    : "-"
+                            }
+                            ${formatarMoeda(
+                                movimento.valor
+                            )}
+                        </strong>
+                    `;
+
+
+                    listaHistorico
+                        .appendChild(card);
+
+                }
+            );
+
+        }
+
     } catch (erro) {
 
         console.error(
@@ -288,29 +425,9 @@ async function carregarResumo() {
         );
 
 
-        totalEntradas.textContent =
-            "R$ 0,00";
-
-
-        totalContasPagas.textContent =
-            "R$ 0,00";
-
-
-        totalPendentes.textContent =
-            "R$ 0,00";
-
-
-        saldoAtual.textContent =
-            "R$ 0,00";
-
-
-        saldoFuturo.textContent =
-            "R$ 0,00";
-
-
-        listaProximasContas.innerHTML = `
-            <p class="sem-contas">
-                Não foi possível carregar as contas.
+        listaHistorico.innerHTML = `
+            <p class="sem-historico">
+                Não foi possível carregar o histórico.
             </p>
         `;
 
