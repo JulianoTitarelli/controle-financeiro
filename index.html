@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -15,23 +16,127 @@
         rel="stylesheet"
         href="css/style.css"
     >
+
 </head>
 
 <body>
 
-    <main class="inicio">
+    <header class="topo">
 
-    <h1>Controle Financeiro</h1>
+        <h1>Controle Financeiro</h1>
 
-    <p>
-        Meu controle financeiro
-    </p>
+        <p>
+            Minha vida financeira
+        </p>
 
-    <button id="testeFirebase">
-        TESTAR FIREBASE
-    </button>
+    </header>
 
-</main>
+
+    <main class="painel">
+
+
+        <!-- SALDO ATUAL -->
+
+        <section class="saldo-principal">
+
+            <span>
+                Saldo atual
+            </span>
+
+            <strong id="saldoAtual">
+                R$ 0,00
+            </strong>
+
+        </section>
+
+
+        <!-- RESUMO -->
+
+        <section class="resumo">
+
+
+            <div class="resumo-card entrada">
+
+                <span>
+                    Entradas recebidas
+                </span>
+
+                <strong id="totalEntradas">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+
+            <div class="resumo-card conta">
+
+                <span>
+                    Contas pagas
+                </span>
+
+                <strong id="totalContasPagas">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+
+            <div class="resumo-card pendente">
+
+                <span>
+                    Contas pendentes
+                </span>
+
+                <strong id="totalPendentes">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- SALDO FUTURO -->
+
+        <section class="saldo-futuro">
+
+            <span>
+                Saldo após contas pendentes
+            </span>
+
+            <strong id="saldoFuturo">
+                R$ 0,00
+            </strong>
+
+        </section>
+
+
+        <!-- BOTÕES -->
+
+        <section class="acoes">
+
+            <a href="entradas.html">
+                + Nova entrada
+            </a>
+
+            <a href="contas.html">
+                + Nova conta
+            </a>
+
+            <a href="entradas.html">
+                Ver entradas
+            </a>
+
+            <a href="contas.html">
+                Ver contas
+            </a>
+
+        </section>
+
+
+    </main>
+
 
     <script
         type="module"
