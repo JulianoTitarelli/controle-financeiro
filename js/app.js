@@ -1,3 +1,4 @@
+```javascript
 import { db } from "./firebase.js";
 
 import {
@@ -13,24 +14,22 @@ const totalEntradas =
     document.getElementById("totalEntradas");
 
 const totalContasPagas =
-    document.getElementById(
-        "totalContasPagas"
-    );
+    document.getElementById("totalContasPagas");
 
 const totalPendentes =
-    document.getElementById(
-        "totalPendentes"
-    );
+    document.getElementById("totalPendentes");
 
 const saldoFuturo =
-    document.getElementById(
-        "saldoFuturo"
-    );
+    document.getElementById("saldoFuturo");
+
+const listaProximasContas =
+    document.getElementById("listaProximasContas");
 
 
-// ==============================
-// FORMATA VALOR
-// ==============================
+
+/* ========================================
+   FORMATAR MOEDA
+======================================== */
 
 function formatarMoeda(valor) {
 
@@ -45,9 +44,26 @@ function formatarMoeda(valor) {
 }
 
 
-// ==============================
-// CARREGAR DADOS
-// ==============================
+
+/* ========================================
+   FORMATAR DATA
+======================================== */
+
+function formatarData(data) {
+
+    return new Date(
+        data + "T00:00:00"
+    ).toLocaleDateString(
+        "pt-BR"
+    );
+
+}
+
+
+
+/* ========================================
+   CARREGAR RESUMO
+======================================== */
 
 async function carregarResumo() {
 
@@ -55,19 +71,13 @@ async function carregarResumo() {
 
         const entradasSnapshot =
             await getDocs(
-                collection(
-                    db,
-                    "entradas"
-                )
+                collection(db, "entradas")
             );
 
 
         const contasSnapshot =
             await getDocs(
-                collection(
-                    db,
-                    "contas"
-                )
+                collection(db, "contas")
             );
 
 
@@ -78,9 +88,12 @@ async function carregarResumo() {
         let contasPendentes = 0;
 
 
-        // ==========================
-        // ENTRADAS
-        // ==========================
+        const contasPendentesLista = [];
+
+
+        /* ========================= */
+        /* ENTRADAS */
+        /* ========================= */
 
         entradasSnapshot.forEach(
             (documento) => {
@@ -90,8 +103,7 @@ async function carregarResumo() {
 
 
                 if (
-                    entrada.status ===
-                    "recebido"
+                    entrada.status === "recebido"
                 ) {
 
                     entradasRecebidas +=
@@ -105,9 +117,9 @@ async function carregarResumo() {
         );
 
 
-        // ==========================
-        // CONTAS
-        // ==========================
+        /* ========================= */
+        /* CONTAS */
+        /* ========================= */
 
         contasSnapshot.forEach(
             (documento) => {
@@ -117,8 +129,7 @@ async function carregarResumo() {
 
 
                 if (
-                    conta.status ===
-                    "pago"
+                    conta.status === "pago"
                 ) {
 
                     contasPagas +=
@@ -130,8 +141,7 @@ async function carregarResumo() {
 
 
                 if (
-                    conta.status ===
-                    "pendente"
+                    conta.status === "pendente"
                 ) {
 
                     contasPendentes +=
@@ -139,15 +149,33 @@ async function carregarResumo() {
                             conta.valor
                         );
 
+
+                    contasPendentesLista.push({
+
+                        id: documento.id,
+
+                        descricao:
+                            conta.descricao,
+
+                        valor:
+                            Number(
+                                conta.valor
+                            ),
+
+                        vencimento:
+                            conta.vencimento
+
+                    });
+
                 }
 
             }
         );
 
 
-        // ==========================
-        // CÁLCULOS
-        // ==========================
+        /* ========================= */
+        /* CÁLCULOS */
+        /* ========================= */
 
         const saldo =
             entradasRecebidas -
@@ -158,10 +186,6 @@ async function carregarResumo() {
             saldo -
             contasPendentes;
 
-
-        // ==========================
-        // MOSTRAR NA TELA
-        // ==========================
 
         totalEntradas.textContent =
             formatarMoeda(
@@ -193,6 +217,88 @@ async function carregarResumo() {
             );
 
 
+        /* ========================= */
+        /* PRÓXIMAS CONTAS */
+        /* ========================= */
+
+        contasPendentesLista.sort(
+            (a, b) =>
+                a.vencimento.localeCompare(
+                    b.vencimento
+                )
+        );
+
+
+        const proximas =
+            contasPendentesLista.slice(
+                0,
+                5
+            );
+
+
+        listaProximasContas.innerHTML =
+            "";
+
+
+        if (proximas.length === 0) {
+
+            listaProximasContas.innerHTML = `
+                <p class="sem-contas">
+                    Nenhuma conta pendente.
+                </p>
+            `;
+
+        } else {
+
+            proximas.forEach(
+                (conta) => {
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "card-proxima-conta";
+
+
+                    card.innerHTML = `
+
+                        <div>
+
+                            <h3>
+                                ${conta.descricao}
+                            </h3>
+
+                            <p>
+                                Vencimento:
+                                ${formatarData(
+                                    conta.vencimento
+                                )}
+                            </p>
+
+                        </div>
+
+
+                        <strong>
+                            ${formatarMoeda(
+                                conta.valor
+                            )}
+                        </strong>
+
+                    `;
+
+
+                    listaProximasContas
+                        .appendChild(card);
+
+                }
+            );
+
+        }
+
+
     } catch (erro) {
 
         console.error(
@@ -200,13 +306,18 @@ async function carregarResumo() {
             erro
         );
 
+
+        listaProximasContas.innerHTML = `
+            <p class="sem-contas">
+                Não foi possível carregar as contas.
+            </p>
+        `;
+
     }
 
 }
 
 
-// ==============================
-// INICIAR
-// ==============================
 
 carregarResumo();
+```
