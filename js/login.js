@@ -11,7 +11,7 @@ import {
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDw6y1sqRa6A-BAY2KE22KkNXz7GYg3bEo",
+    apiKey: "AIzaSyC7HSt6-NcB1ljU53IUXAhlnichQ2hCI0s",
     authDomain: "controle-financeiro-f6df9.firebaseapp.com",
     projectId: "controle-financeiro-f6df9",
     storageBucket: "controle-financeiro-f6df9.firebasestorage.app",
