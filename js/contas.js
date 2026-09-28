@@ -379,16 +379,10 @@ async function carregarContas() {
    REPETIR CONTA
 ======================================== */
 
-function repetirConta(conta) {
-
-    if (!conta.vencimento) {
-        return;
-    }
-
+async function repetirConta(conta) {
 
     const partes =
         conta.vencimento.split("-");
-
 
     const ano =
         Number(partes[0]);
@@ -400,16 +394,26 @@ function repetirConta(conta) {
         Number(partes[2]);
 
 
-    const proximoMes =
-        new Date(
-            ano,
-            mes,
-            0
-        );
+    let novoAno = ano;
+
+    let novoMes = mes + 1;
+
+
+    if (novoMes > 12) {
+
+        novoMes = 1;
+
+        novoAno++;
+
+    }
 
 
     const ultimoDia =
-        proximoMes.getDate();
+        new Date(
+            novoAno,
+            novoMes,
+            0
+        ).getDate();
 
 
     const novoDia =
@@ -420,33 +424,54 @@ function repetirConta(conta) {
 
 
     const novaData =
-        `${ano}-${String(mes).padStart(2, "0")}-${String(novoDia).padStart(2, "0")}`;
+        `${novoAno}-${String(novoMes).padStart(2, "0")}-${String(novoDia).padStart(2, "0")}`;
 
 
-    descricao.value =
-        conta.descricao;
+    try {
+
+        await addDoc(
+            contasRef,
+            {
+
+                descricao:
+                    conta.descricao,
+
+                valor:
+                    Number(conta.valor),
+
+                vencimento:
+                    novaData,
+
+                status:
+                    "pendente",
+
+                criadoEm:
+                    new Date()
+
+            }
+        );
 
 
-    valor.value =
-        conta.valor;
+        alert(
+            "Conta repetida com sucesso!"
+        );
 
 
-    vencimento.value =
-        novaData;
+        carregarContas();
 
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    } catch (erro) {
+
+        console.error(erro);
 
 
-    alert(
-        "Conta preparada para o próximo mês. Confira os dados e clique em ADICIONAR CONTA."
-    );
+        alert(
+            "Não foi possível repetir a conta."
+        );
+
+    }
 
 }
-
 
 
 /* ========================================
