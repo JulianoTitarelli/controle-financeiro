@@ -276,6 +276,13 @@ async function carregarContas() {
 
 
                     <button
+                        class="btn-repetir"
+                    >
+                        REPETIR
+                    </button>
+
+
+                    <button
                         class="btn-excluir"
                     >
                         EXCLUIR
@@ -283,6 +290,10 @@ async function carregarContas() {
 
                 `;
 
+
+                /* =========================
+                   BOTÃO STATUS
+                ========================= */
 
                 const botaoStatus =
                     card.querySelector(
@@ -299,6 +310,29 @@ async function carregarContas() {
                         )
                 );
 
+
+                /* =========================
+                   BOTÃO REPETIR
+                ========================= */
+
+                const botaoRepetir =
+                    card.querySelector(
+                        ".btn-repetir"
+                    );
+
+
+                botaoRepetir.addEventListener(
+                    "click",
+                    () =>
+                        repetirConta(
+                            conta
+                        )
+                );
+
+
+                /* =========================
+                   BOTÃO EXCLUIR
+                ========================= */
 
                 const botaoExcluir =
                     card.querySelector(
@@ -336,6 +370,80 @@ async function carregarContas() {
         `;
 
     }
+
+}
+
+
+
+/* ========================================
+   REPETIR CONTA
+======================================== */
+
+function repetirConta(conta) {
+
+    if (!conta.vencimento) {
+        return;
+    }
+
+
+    const partes =
+        conta.vencimento.split("-");
+
+
+    const ano =
+        Number(partes[0]);
+
+    const mes =
+        Number(partes[1]);
+
+    const dia =
+        Number(partes[2]);
+
+
+    const proximoMes =
+        new Date(
+            ano,
+            mes,
+            0
+        );
+
+
+    const ultimoDia =
+        proximoMes.getDate();
+
+
+    const novoDia =
+        Math.min(
+            dia,
+            ultimoDia
+        );
+
+
+    const novaData =
+        `${ano}-${String(mes).padStart(2, "0")}-${String(novoDia).padStart(2, "0")}`;
+
+
+    descricao.value =
+        conta.descricao;
+
+
+    valor.value =
+        conta.valor;
+
+
+    vencimento.value =
+        novaData;
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+
+    alert(
+        "Conta preparada para o próximo mês. Confira os dados e clique em ADICIONAR CONTA."
+    );
 
 }
 
@@ -450,4 +558,3 @@ async function excluirConta(
 ======================================== */
 
 carregarContas();
-
