@@ -1,8 +1,4 @@
-import { db, auth } from "./firebase.js";
-
-import {
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+import { db } from "./firebase.js";
 
 import {
     collection,
@@ -438,27 +434,5 @@ async function carregarResumo() {
     }
 
 }
-
-
-/* ========================= */
-/* VERIFICAR LOGIN */
-/* ========================= */
-
-onAuthStateChanged(
-    auth,
-    (usuario) => {
-
-        if (!usuario) {
-
-            window.location.href =
-                "login.html";
-
-            return;
-
-        }
-
-
-        carregarResumo();
-
-    }
-);
+carregarResumo();
+       
