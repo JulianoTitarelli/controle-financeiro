@@ -27,10 +27,18 @@ const salvarConta =
 const listaContas =
     document.getElementById("listaContas");
 
+const mesSelecionado =
+    document.getElementById("mesSelecionado");
 
 const contasRef =
     collection(db, "contas");
 
+const hoje = new Date();
+
+mesSelecionado.value =
+    `${hoje.getFullYear()}-${String(
+        hoje.getMonth() + 1
+    ).padStart(2, "0")}`;
 
 
 /* ========================================
@@ -184,11 +192,28 @@ async function carregarContas() {
         }
 
 
+        let encontrouContas = false;
+
+
         resultado.forEach(
             (documento) => {
 
                 const conta =
                     documento.data();
+
+
+                if (
+                    !conta.vencimento.startsWith(
+                        mesSelecionado.value
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                encontrouContas = true;
 
 
                 const valorFormatado =
@@ -291,10 +316,6 @@ async function carregarContas() {
                 `;
 
 
-                /* =========================
-                   BOTÃO STATUS
-                ========================= */
-
                 const botaoStatus =
                     card.querySelector(
                         ".btn-pagar, .btn-desfazer"
@@ -311,10 +332,6 @@ async function carregarContas() {
                 );
 
 
-                /* =========================
-                   BOTÃO REPETIR
-                ========================= */
-
                 const botaoRepetir =
                     card.querySelector(
                         ".btn-repetir"
@@ -329,10 +346,6 @@ async function carregarContas() {
                         )
                 );
 
-
-                /* =========================
-                   BOTÃO EXCLUIR
-                ========================= */
 
                 const botaoExcluir =
                     card.querySelector(
@@ -358,6 +371,17 @@ async function carregarContas() {
         );
 
 
+        if (!encontrouContas) {
+
+            listaContas.innerHTML = `
+                <p>
+                    Nenhuma conta cadastrada neste mês.
+                </p>
+            `;
+
+        }
+
+
     } catch (erro) {
 
         console.error(erro);
@@ -372,9 +396,6 @@ async function carregarContas() {
     }
 
 }
-
-
-
 /* ========================================
    REPETIR CONTA
 ======================================== */
@@ -576,7 +597,14 @@ async function excluirConta(
 
 }
 
+mesSelecionado.addEventListener(
+    "change",
+    () => {
 
+        carregarContas();
+
+    }
+);
 
 /* ========================================
    INICIAR
