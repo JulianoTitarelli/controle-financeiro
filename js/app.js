@@ -1,9 +1,16 @@
-import { db } from "./firebase.js";
+import { db, auth } from "./firebase.js";
 
 import {
     collection,
     getDocs
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+import {
+    GoogleAuthProvider,
+    signInWithRedirect,
+    onAuthStateChanged,
+    getRedirectResult
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
 
 const saldoAtual =
